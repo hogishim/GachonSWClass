@@ -43,13 +43,13 @@
     - group은 외부에서 보면 하나의 process처럼 동작한다
     - flat group: fault tolerance에 좋다
         
-        ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled.png)
+        ![Untitled](07%20Fault%20tolerance/Untitled.png)
         
         - 관리하는 것이 복잡하기 때문에 overhead가 많이 발생할 수 있다
         - 분산 알고리즘
     - hierachical group: 하나의 coordinator가 관리
         
-        ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%201.png)
+        ![Untitled](07%20Fault%20tolerance/Untitled%201.png)
         
         - coordinator가 죽으면 fault tolerant가 불가능
         - 중앙 집중형 알고리즘
@@ -64,7 +64,7 @@
 
 ### Byzantine General’s problem: 일부에 배신자가 있더라도 어떻게 정보를 통일할까?? - 과반수 이하로 배신자가 있다면 okay
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled.jpeg)
+![Untitled](07%20Fault%20tolerance/Untitled.jpeg)
 
 - general과 lieutenant가 각각 정상이거나 배신자가 될 수 있다
 - general이 leiutenant에게 명령을 내리면, leiutenant들이 서로 명령을 확인하고, 과반이 넘는 명령으로 명령을 수행
@@ -72,19 +72,19 @@
 - IC2: commander가 정상이라면 나머지 general모두 명령어를 따라야 한다
 - 짬찌중에서 배신자가 있다면: 배신자 짬찌가 명령어를 잘못 전달해서, 배신자가 아닌 짬찌에게 알려주고, 그렇게 되면 attack retreat이 과반수를 둘다 못넘기게 된다
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%202.png)
+![Untitled](07%20Fault%20tolerance/Untitled%202.png)
 
 - commander가 배신자라면?: 명령을 두 짬찌에게 각각 반대로 전달하기 때문에 과반수 확보가 불가능하다
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%203.png)
+![Untitled](07%20Fault%20tolerance/Untitled%203.png)
 
 - 한명의 배신자가 있을때(k = 1일), 위와 같이 3(3k)라면 제대로 수행이 불가능하다. 만약 여기서 한명의 배신가자 있을때, 3k+1, 즉 4명이 있다면 배신자가 있더라도 과반 이상의 정상 명령어가 있기 때문에, 문제 없이 수행할 수 있고, 배신자가 있다는 것도 한명이 다르게 말했기 때문에 파악할 수 있다
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%204.png)
+![Untitled](07%20Fault%20tolerance/Untitled%204.png)
 
 - commander가 배신자라면?: 나머지 짬찌들이 모두 배신자가 아니더라도, 명령어를 다르게 받게 된다. 즉, commander가 잘못되면 해결 불가능 하다
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%205.png)
+![Untitled](07%20Fault%20tolerance/Untitled%205.png)
 
 ### Consensus under arbitrary failure semantics: 1개의 primary, n-1개의 backup process가 존재한다
 
@@ -110,7 +110,7 @@
 - client request를 못받음: 재송신을 요청한다. 계속 오류 나는 경우, 그냥 포기한다
 - server crashes: 정상적으로 메세지를 받았더라도 서버가 보내기 전에 내부에서 오류가 난다면 relpy를 보낼 수 없다
     
-    ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%206.png)
+    ![Untitled](07%20Fault%20tolerance/Untitled%206.png)
     
     - 서버는 완료 ACK을 보내지만, client는 ACK만 받고 결과를 받지 못한다
     - 서버가 오류가 난 이후 복구 되었다면, server는 client에게 crash가 일어나서 복구 후 다시 running되고 있다고 알림 → client는 서버가 실제로 보냈는지 파악할 수 없다
@@ -127,7 +127,7 @@
 
 ### Transmission의 종류
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%207.png)
+![Untitled](07%20Fault%20tolerance/Untitled%207.png)
 
 - unicast transmission: point-to-point, 즉 1대 1연결
 - broadcast transmission: 1대 다 연결
@@ -141,13 +141,13 @@
     - ACK: 잘 받았다고 알리는 것
     - NACK: 못받아서 재송신을 요구하는 것
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%208.png)
+![Untitled](07%20Fault%20tolerance/Untitled%208.png)
 
 - sender는 그동안 보냈던 메시지를 저장하는 history buffer를 가지고, sequence number를 messsage에 줘서 수신자가 혹시 받지 못한 message가 있는지 확인할 수 있도록 해준다
 - 만약 3번째 receiver처럼 메세지를 받지 못했다면, NACK을 보내게 된다
 - Reliable multicasting scalability
     
-    ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%209.png)
+    ![Untitled](07%20Fault%20tolerance/Untitled%209.png)
     
     - ACK을 사용하는 경우: sender가 N개에게 보내는 경우, ACK이 N개 오기 때문에 너무 많아져서 복잡해진다
     - NACK을 사용하는 경우: sender가 보냈을때, 정상적으로 받은 경우 말고, 잘 못받은 경우에만 NACK을 보낸다. ACK보다는 scalability측면에서 더 유리하다
@@ -156,7 +156,7 @@
 
 ### Scalable Reliable Multicasting(SRM)
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2010.png)
+![Untitled](07%20Fault%20tolerance/Untitled%2010.png)
 
 - NACK을 사용하는데, 수신자는 random하게 기다렸다가 multicast한다
 - 이 경우, 여러개의 failure가 나더라도 NACK은 하나만 보내면 된
@@ -164,7 +164,7 @@
 
 ### Hierarchical Feedback Control
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2011.png)
+![Untitled](07%20Fault%20tolerance/Untitled%2011.png)
 
 - group은 여러개의 subgroup으로 나누어지고, tree구조로 조직된다
 - 메세지를 보낼때, local에 있는 local coordinator를 통해 보내게 된다
@@ -178,7 +178,7 @@
 
 ### 메시지 송신과 수신의 차이점: 메세지를 수신할때는 reception과 delivery에 level의 차이가 존재한다
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2012.png)
+![Untitled](07%20Fault%20tolerance/Untitled%2012.png)
 
 ### 🧙‍♂️Process failure: process가 fail되었을때, 어떻게 대처해야 할까?
 
@@ -192,18 +192,18 @@
 
 - FIFO-ordered multicasting: 같은 프로세스 메세지는 순서대로, 다른 프로세스 메세지는 상관없음
     
-    ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2013.png)
+    ![Untitled](07%20Fault%20tolerance/Untitled%2013.png)
     
     - 같은 색이면 같은 프로세스라고 가정할때, 파란 프로세스가 P1에서는 m3, m4, m5의 순서를 가지는데, P2에서는 m4, m3, m5의 순서를 가지기 때문에 ordering이 맞지 않다
 - casually-ordered multicasts: m1→m2가 casually related라면, 반드시 그 순서를 지켜야 한다
     
-    ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2014.png)
+    ![Untitled](07%20Fault%20tolerance/Untitled%2014.png)
     
     - m1 → m4, m5 → m8이 casually related된 경우라면, 반드시 모든 프로세스에서 두 message의 선후관계가 지켜져야 한다
     - 선후관계를 서로 다른 프로세스에서 확인하는 것은 어렵다
 - totally-ordered multicasts: 실제 보낸 순서와는 상관 없이, 모두 동일한 순서로 왔다면 okay
     
-    ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2015.png)
+    ![Untitled](07%20Fault%20tolerance/Untitled%2015.png)
     
     - 다른 메세지는 모두 순서가 동일하기 때문에 괜찮지만, p1과 p2의 m1, m2순서, p2와 p3의 m0, m8의 순서가 맞지 않기 때문에 ordering이 맞지 않다
     
@@ -219,27 +219,27 @@
 
 ### Two-phase commit(2PC): node가 모두 준비된 경우에만 COMMIT, 그 외의 경우에는 ABORT
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2016.png)
+![Untitled](07%20Fault%20tolerance/Untitled%2016.png)
 
 - 2PC 알고리즘: coordiantor는 worker에게 commit할 수 있는지 물어보고, 모든 worker가 VOTE-COMMIT이라고 하면, coordinator는 GLOBAL-COMMIT 메세지를 보내고, 그 외의 경우에는 coordinator는 GLOBAL-ABORT라고 보낸다. Worker는 GLOBAL 메세지에 복종한다
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2017.png)
+![Untitled](07%20Fault%20tolerance/Untitled%2017.png)
 
 - 모든 참여자는 실제 commit하기 전에, coordinator에게 feedback을 보내야 한다
 - worker에 failure가 난 경우: GLOBAL-ABORT
     - failure는 node가 message를 기다리고 있는 상태일때 오류가 난다
     - coordinator가 wait인 상태일때 failure가 나는 경우, timeout이 날때까지 COMMIT을 받지 못하는 경우, GLOBAL-ABORT 해준다
         
-        ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2018.png)
+        ![Untitled](07%20Fault%20tolerance/Untitled%2018.png)
         
 - coordinator가 오류난 경우
     - INIT상태: coordinator가 요청을 보낼때, 보내지 못하고 오류가 난 경우, timeout까지 기다린 이후에 ABORT 메세지를 coordinator에게 보낸다
         
-        ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2019.png)
+        ![Untitled](07%20Fault%20tolerance/Untitled%2019.png)
         
     - READY상태: VOTE-COMMIT을 보낸 이후에 오류가 난 경우, worker들은 이미 commit준비를 한 상태이기 때문에 block해놓고 기다리다가 coordinator가 restart되면, 명령어를 받고 종료시킨다
         
-        ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2020.png)
+        ![Untitled](07%20Fault%20tolerance/Untitled%2020.png)
         
         - worker가 READY한 상태라면 다른 프로세스에게 물어봐야 한다
             - 이 상황은 worker들은 VOTE_REQUEST를 coordinator로 부터 받고 응답을 보냈지만 coordinator가 fail된 것이다
@@ -257,22 +257,22 @@
 
 ### Three-Phase Commit(3PC): COMMIT 들어가기 전에 상태 하나를 더 추가한다
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2021.png)
+![Untitled](07%20Fault%20tolerance/Untitled%2021.png)
 
-![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2022.png)
+![Untitled](07%20Fault%20tolerance/Untitled%2022.png)
 
 - worker가 오류나는 경우
     - WAIT상태: GLOBAL-ABORT
         - coordinator는 WAIT상태로 worker로부터 응답 오기를 기다린다
         - WAIT에서, timeout으로 VOTE를 충분히 받지 못하는 경우에는, GLOBAL-ABORT시킨다
             
-            ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2023.png)
+            ![Untitled](07%20Fault%20tolerance/Untitled%2023.png)
             
     - PRECOMMIT상태: GLOBAL-COMMIT
         - worker 모두 VOTE-COMMIT을 보내거나, READY-COMMIT을 보낸 상태이다
         - 하나의 worker가 crash난 경우일수 있지만, 다른 worker들은 COMMIT을 보낸 상황이다. 따라서 일단 GLOBAL-COMMIT을 보내고, crash난 worker는 나중에 복구된 이후에 실행하게 된다
             
-            ![Untitled](07%20Fault%20tolerance%20e844c3980d7d47aa93c269b1a7ac524e/Untitled%2024.png)
+            ![Untitled](07%20Fault%20tolerance/Untitled%2024.png)
             
 - coordinator가 오류나는 경우
     - INIT상태: timeout까지 기다렸다가 ABORT한다

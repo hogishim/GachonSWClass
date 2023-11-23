@@ -9,7 +9,7 @@
 
 ### 🧙‍♂️속성 & 특징
 
-![Untitled](08%20Cloud%20computing%/Untitled.png)
+![Untitled](08%20Cloud%20computing/Untitled.png)
 
 - scalability elasticity: 확장성은 시스템이 서비스의 성능과 가용성 유지하면서 작업 부하를 처리하는데 역활을 하고, 탄력성은 작업 부하 변동에 신속하게 대응하여 리소스를 효율적으로 사용하도록 한다
 - availability reliability: 가용성은 사용자가 서비스를 항상 이용할 수 있는 것, 신뢰성은 시스템이 예상 가능한 방식으로 작동하고, 데이터의 손실이나 오류 없이 정확한 결과를 제공하는 것
