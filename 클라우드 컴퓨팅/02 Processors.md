@@ -4,7 +4,7 @@
 
 ### User space: process는 각 process마다 공간을 가진다
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled.png)
+![Untitled](02%20Processors/Untitled.png)
 
 - stack: 동적으로 할당되는 영역. 지역변수, 매개변수, 함수가 쌓인다
 - heap: 프로그래머가 할당하는 영역으로 메모리가 동적으로 할당되는 영역. Stack과 heap이 만나는 경우, 이를 stack overflow라고 부른다
@@ -26,7 +26,7 @@
 
 ### Process의 state: running상태인 process는 하나만 존재할 수 있다
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%201.png)
+![Untitled](02%20Processors/Untitled%201.png)
 
 - new: process가 만들어지고 있는 상태
 - ready: process가 CPU로 할당되기 기다려지고 있는 상태
@@ -36,7 +36,7 @@
 
 ### Process Control Block(PCB)
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%202.png)
+![Untitled](02%20Processors/Untitled%202.png)
 
 - process state: 위에서 언급한 process의 state를 저장하고 있다
 - process number(PID)
@@ -46,7 +46,7 @@
 
 ### ✨Thread: 각 thread는 각자의 register, PC, stack을 가진다. 같은 process에 있는 thread들은 같은 address 공간을 공유한다
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%203.png)
+![Untitled](02%20Processors/Untitled%203.png)
 
 - PCB와 TCB의 차이점은 stack과 PC값이 thread만큼 계속 생긴다
 - TCB에서 heap과 data의 부분은 동기화 과정이 필요하다
@@ -80,7 +80,7 @@
 
 ### Multi-thread models: 어떻게 mapping될 수 있을까?
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%204.png)
+![Untitled](02%20Processors/Untitled%204.png)
 
 - many-to-one: 여러 user thread가 하나의 kernel로 mapping되는 것. 이 경우 효과는 낮다
 - one-to-one: 각 user thread가 각각 1:1로 kernel로 mapping되는 것. kernel thread가 계속 생기는 것은 불가능하다
@@ -116,7 +116,7 @@ Multi-threaded server
 
 ### Computer system interfaces
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%205.png)
+![Untitled](02%20Processors/Untitled%205.png)
 
 - general machine instruction: 하드웨어에 직접적으로 접근하는 application의 interface로, app에서 H/W로 직접적으로 접근하는 경우는 드물며,  add a1, a2, a3와 같은 경우와 같이 제한적으로 접근할 수 있다
 - privileged machine instructions: read disk, 네트워크를 이용한 통신 같은 OS에서 hardware로  접근하는 경우에 이용되는 interface
@@ -128,17 +128,17 @@ Multi-threaded server
 
 ### Application virtualization: runtime을 가상화하는 것으로 library단에서 깔아줌. Platform에 독립적으로 동작하는 환경을 만드는 것이 목표로, 프로그램이 서로 다른 환경에서 동일하게 동작할 수 있도록 함
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%206.png)
+![Untitled](02%20Processors/Untitled%206.png)
 
 예시> 자바의 경우, javac는 각기 다른 하드웨어에서 다른 버전을 설치해야 하지만, 다른 하드웨어에서 동일한 내용을 작성할 경우, javac를 거쳐서 나오는 .jar파일은 하드웨어에 상관 없이 동일하다. 이후 JVM을 거쳐서 나오는 기계어는 하드웨어에 따라 다르다
 
 ### Native Virtual Machine Monitor(VMM): native라는 것은 hardware바로 위에 구현된 것이다. 하드웨어 바로 위에서 firmware단으로 돌아단다. 제공되는 interface를 통해서 다른 OS, 다른 hardware platform에서 동작할 수 있다
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%207.png)
+![Untitled](02%20Processors/Untitled%207.png)
 
 ### Hosted Virtual Machine Monitor(VMM): host OS위에서 다른 OS가 동작할 수 있게 해주는 것. Virtual Machine이라고도 불린다. 3가지 방식중에서는 성능 면에서 가장 안좋다
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%208.png)
+![Untitled](02%20Processors/Untitled%208.png)
 
 ### ✨Virtual machine: physical computer의 자원, disk, CPU의 할당을 바꿀 수 있다
 
@@ -165,7 +165,7 @@ ex> VMware, Hypervisor(Xen) - interface를 하나 줄여서 성능을 향상, cl
 
 1. clos topology: 복합적인 계층 구조로 만든다. Mesh 형식으로 만들어 하나가 망가지더라도 잘 동작할 수 있도록 한다. Core근처로 가면 traffic이 몰리기 때문에 관리하는 것이 쉽지 않은다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%209.png)
+    ![Untitled](02%20Processors/Untitled%209.png)
     
 2. centralized control protocols: clos topology로 한다는 것은 기존 switch로 감당할 수 없다는 것을 의미한다. 이는 Software Defined Networking(SDN)을 통해서 SW적으로 handling한다. 이는 자체적으로 protocol을 만들어서 remodeling하는 것으로, master node가 link상태를 수집하고, 각 switch는 개별적으로 forwarding table을 계산한다
 
@@ -193,7 +193,7 @@ ex> VMware, Hypervisor(Xen) - interface를 하나 줄여서 성능을 향상, cl
 - 이전 network는 vertically integrated라고 하여 폐쇄적이고 발전이 느리고 규모가 작았기 때문에 한가지 사항만 고려하면 되었다
 - 최근의 경우에는 다양화 되었기 때문에 horizontal하다고 보이는데, 이는 open되고 빠르게 발전하며 규모가 훨씬 커져 고려해야할 요소가 많아졌다.
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2010.png)
+![Untitled](02%20Processors/Untitled%2010.png)
 
 - data plane switches: 표준화된 forwarding을 제공. Controller에 의해 설치된 flow table을 사용. API형식으로 제공되어 OpenFlow같은 protocol을 이용하여 controller와 통신
 - SDN controller: 네트워크 정보를 관리. South bound인 switch, north bound인 위 부분의 app과 통신한다. 성능, 확장성, 장애 방지, 견고성을 위해 분산 시스템으로 구현
@@ -205,7 +205,7 @@ ex> VMware, Hypervisor(Xen) - interface를 하나 줄여서 성능을 향상, cl
 
 SDN의 동작 예시
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2011.png)
+![Untitled](02%20Processors/Untitled%2011.png)
 
 1. S1에 오류가 발생하여 openflow port를 통해서 control로 error message를 보낸다
 2. SDN controller는 openflow message를 받고 상태를 업데이트 한다
@@ -232,7 +232,7 @@ SDN의 동작 예시
 
 ### TCP handoff: 서버 load를 분산시키기 위해, 연결을 맺을때, server중 최적의 서버를 골라서 맺는 것
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2012.png)
+![Untitled](02%20Processors/Untitled%2012.png)
 
 - transport-layer switch를 이용하여 타 server와 연동 가능
 - 여러 server로 구성된 것을 사용자가 모르게 해야 한다. Entry point의 IP는 하나만 존재해야 한다
@@ -280,39 +280,39 @@ SDN의 동작 예시
 
 ### MapReduce의 동작 과정
 
-![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2013.png)
+![Untitled](02%20Processors/Untitled%2013.png)
 
 1. 데이터는 MapReduce library를 이용하여 input data를 block(16-64mb)으로 나눈다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2014.png)
+    ![Untitled](02%20Processors/Untitled%2014.png)
     
 2. user program은 program copy를 만들고, 그중 하나를 master thread로 설정하고 나머지는 worker thread로 설정한다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2015.png)
+    ![Untitled](02%20Processors/Untitled%2015.png)
     
 3. master는 map의 개수 M, key값의 개수 R을 유휴중인 worker에게 분배한다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2016.png)
+    ![Untitled](02%20Processors/Untitled%2016.png)
     
 4. 각 worker는 task를 처리하고 중간 key/value pair output을 만든다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2017.png)
+    ![Untitled](02%20Processors/Untitled%2017.png)
     
 5. 각 worker는 R개의 region으로 나누어진 intermediate value를 출력하고, master thread에게 알린다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2018.png)
+    ![Untitled](02%20Processors/Untitled%2018.png)
     
 6. master는 작업이 가능한 중간 데이터를 읽게되는 reduce-task worker에게 중간 데이터의 disk위치를 넘겨준다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2019.png)
+    ![Untitled](02%20Processors/Untitled%2019.png)
     
 7. 각 reduce-task worker는 중간 데이터를 sorting하고 reduce function을 호출한다. Reduce function의 output이 reduce-task의 partition output에 붙는다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2020.png)
+    ![Untitled](02%20Processors/Untitled%2020.png)
     
 8. master가 user process에게 완료되면 전달해준다
     
-    ![Untitled](02%20Processors%20afbd5d69c74347bdb392d40af644f9e1/Untitled%2021.png)
+    ![Untitled](02%20Processors/Untitled%2021.png)
     
 - 예시> URL 접속 횟수 count, target에 대한 source list
 - MapReduce는 Google에서 search에 활용, Yahoo search에 활용, spam 탐지에 활용 되었고, facebook에서는 data mining, ad optimization, spam detection에 활용되었다

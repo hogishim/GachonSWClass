@@ -16,7 +16,7 @@
 
 ### ✨**Google File System(GFS)**: 내용이 분산되어 있어 네트워크를 통해 서로 접근 가능하다
 
-![Untitled](01%20Introducton%20c20224911c844531a2f62bd98ca90117/Untitled.png)
+![Untitled](01%20Introducton/Untitled.png)
 
 - Chunk: chunk는 데이터를 쪼개놓은 것으로 page라고도 불리며, 구글의 경우 64mb로 잡고 있다. Chunk의 경우 적절한 크기를 잡는 것이 중요하다. 너무 크면 낭비가 많고, 너무 작으면 chunk가 너무 많아진다
 - Chunk server: 각 파일에 대한 메타데이터를 저장하고 있다. Chunk server는 여러개 존재
@@ -53,7 +53,7 @@
         - DNS: 계층화 구조로 이루어져, 분산되도록 한다
         - WWW: 서버는 한 곳이 처리하는 것이 아니라, 세계에 퍼진 여러 server가 처리한다
         
-        ![Untitled](01%20Introducton%20c20224911c844531a2f62bd98ca90117/Untitled%201.png)
+        ![Untitled](01%20Introducton/Untitled%201.png)
         
         - Symmetric Multiprocessor(SMP): RAM을 공유하는 shared memory
         - Distributed system(cloud): RAM을 공유하지 않고 network통한 교류하는 private memory. Delay가 발생할 수 있다.
@@ -69,7 +69,7 @@
 
 ### ✨Middleware: app과 다양한 machine사이에 존재하여 각 app에 같은 interface를 제공하여 여러 시스템을 동시에 관리할 수 있도록 해준다. 밑단의 OS가 다르더라도, middleware 윗 단에서는 동일하게 사용할 수 있도록 한다.
 
-![Untitled](01%20Introducton%20c20224911c844531a2f62bd98ca90117/Untitled%202.png)
+![Untitled](01%20Introducton/Untitled%202.png)
 
 ### ✨Cloud computing: cloud는 parallel (모든 작업이 동시에 수행), distributed (모든 작업이 동시에 수행될 필요는 없는)작업의 일종으로, 서로 연결되거나 가상화된 컴퓨터들이 여분 자원을 준비했다가 자원을 유연하게 계약된 수준에 따라서 분배하여주는 서비스
 
@@ -82,7 +82,7 @@
 - platform: SW단까지 packaging한 것
 - framework: 정해진 틀에서 parameter들만 바꾸는 것
 
-![Untitled](01%20Introducton%20c20224911c844531a2f62bd98ca90117/Untitled%203.png)
+![Untitled](01%20Introducton/Untitled%203.png)
 
 - Traditional IT: 표준화된 가상 머신
 - IaaS
@@ -93,7 +93,7 @@
 
 >>스마트폰은 asymmetric multiprocessor를 이용하는데, 이는 에너지의 한계 때문이다. 간단한 작업들을 성능이 덜 좋은 processor가 수행하고, 고성능 작업은 고성능 processor가 담당한다
 
-![Untitled](01%20Introducton%20c20224911c844531a2f62bd98ca90117/Untitled%204.png)
+![Untitled](01%20Introducton/Untitled%204.png)
 
 - processor는 명령어를 해석하는 control unit, 연산을 수행하는 ALU로 구성된다
 - cache는 메인 메모리까지 이동하는 시간을 단축시켜준다

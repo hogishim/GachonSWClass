@@ -38,7 +38,7 @@
 
 ### Dynamic provisioning: 이용률은 일정하게 유지되는 것이 아니라, 계속 변동된다. 따라서 이에 맞춰서 제공하는 것은 어렵다
 
-![Untitled](08%20Cloud%20computing%/Untitled%201.png)
+![Untitled](08%20Cloud%20computing/Untitled%201.png)
 
 - 자원을 너무 많이 잡으면 사용자가 많이 없는 경우에 자원이 낭비되고, 자원이 너무 적으면 사용자가 많은 경우에 자원을 사용하지 못하는 사용자가 너무 많다
 - 유동적으로 사용자 수에 따라서 여유분 줄 수 있게, dynamic하게 자원을 잡아준다
@@ -76,17 +76,17 @@
 
 ### 🧙‍♂️System models
 
-![Untitled](08%20Cloud%20computing%/Untitled%202.png)
+![Untitled](08%20Cloud%20computing/Untitled%202.png)
 
 ### Infrastructure as a Service(IaaS): 소비자는 OS 및 어플리케이션을 포함할 수 잇는 SW를 배포하고, processing, storage, network 및 기타 컴퓨팅 리소스를 provision하는 것이다
 
-![Untitled](08%20Cloud%20computing%/Untitled%203.png)
+![Untitled](08%20Cloud%20computing/Untitled%203.png)
 
 - 소비자는 직접 infrastructure를 제어하지 않지만, OS, 스토리지, 배포된 app을 제어할 수 있으며, 일부 네트워크 구성 요소를 제한적으로 제어할 수 있다
 - Amazon EC2, Eucalyputs, OpenNebula 등
 - virtualization: 물리적인 자원이 멀리 떨어져 있을때, 추상화 하는 기술
     
-    ![Untitled](08%20Cloud%20computing%/Untitled%204.png)
+    ![Untitled](08%20Cloud%20computing/Untitled%204.png)
     
     - OS를 hypervisor위로 올려놓는다
     - 여러 OS가 물리적인 HW를 공유하고, 다른 서비스들을 제공한다
@@ -102,7 +102,7 @@
 
 ### Platform as a Service: 공급자가 지원하는 도구를 사용하여 소비자가 생성하거나 획득한 어플리케이션을 클라우드 인프라에 배포하는 것
 
-![Untitled](08%20Cloud%20computing%/Untitled%205.png)
+![Untitled](08%20Cloud%20computing/Untitled%205.png)
 
 - 소비자는 네트워크, 서버, OS, 스토리지를 포함한 인프라를 관리하거나 제어하지는 않지만, 구축된 어플리케이션은 제어할 수 있다
 - Microsoft windows Azure, Google app engine, Hadoop등
@@ -114,7 +114,7 @@
 
 ### Software as a Service: 클라우드에서 제공하는 공급자의 어플리케이션을 사용. 다양한 client에서 어플리케이션에 access가능
 
-![Untitled](08%20Cloud%20computing%/Untitled%206.png)
+![Untitled](08%20Cloud%20computing/Untitled%206.png)
 
 - 사용자는 제한된 어플리케이션 구성 설정 제외하고, 다른 내용을 제어하지 않는다
 - Google app, SalesForce.com, EyeOS등

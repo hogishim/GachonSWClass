@@ -9,7 +9,7 @@
 
 ### Layered architectures: layer 기반으로 배치됨. 네트워크에서 protocol이 쌓여있는 구조를 생각하면 된다
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled.png)
+![Untitled](03%20Storage%20architecture/Untitled.png)
 
 - pure layered architecture: 아래 방향으로만 통신하는 down call 방식
 - mixed layered organization: 일부를 jump할 수 있는 방식
@@ -17,7 +17,7 @@
 
 ### Object-based architectures: component들은 object이며, procedure call을 통해서 서로 연결되어, 하나하나가 연동되어 돌아간다
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%201.png)
+![Untitled](03%20Storage%20architecture/Untitled%201.png)
 
 ### 🌟Storage architecture: 다양한 방식의 저장장치 구조가 존재한다
 
@@ -32,18 +32,18 @@
 - server: client가 보낸 요청을 처리하고, 자원에 대한 관리를 한다
 - centralized architectures: 요청을 보내면, 답이 올때까지 block되어 있음
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%202.png)
+![Untitled](03%20Storage%20architecture/Untitled%202.png)
 
 - server-client communication
     - connectionless: 이전 내용 상관 없이, 연결 맺을때마다 초기화 된다. Idempotent한 경우(같은 연산을 무한으로 반복해도 똑같은 결과가 나오는 ex - read)에서 사용된다
     - connection-oriented: 이전내용이 저장되어, 새로 연결을 맺더라도 이전 결과가 나오도록 한다
     - TCP vs. UDP: 용도마다 비교하여 적절한 상황에 사용한다. TCP는 빠른 전송보다는 안정적으로 손실 없이 데이터를 보내야 하는 경우 사용하고, UDP는 손실이 있더라도 빠르게 보내야하는 경우 사용한다
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%203.png)
+![Untitled](03%20Storage%20architecture/Untitled%203.png)
 
 ### 🌟3-tier view: server, client에 데이터를 저장하는 DB를 따로 분리
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%204.png)
+![Untitled](03%20Storage%20architecture/Untitled%204.png)
 
 - client가 요청을 보냈을때, DB에 접근이 필요한 경우라면, 서버에서 DB server까지 요청이 갔다가 돌아올 때까지 기다리는 시간이 필요하다
 - user-interface level: user와 상호작용 하는 부분
@@ -52,7 +52,7 @@
 
 ### web search가 일어나는 과정
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%205.png)
+![Untitled](03%20Storage%20architecture/Untitled%205.png)
 
 1. 사용자가 입력한 내용이 app server로 전단된다
 2. 효과적인 query를 위해서 내용을 전처리하는 과정을 거친 후, query진행 위해 DB로 보낸다
@@ -60,7 +60,7 @@
 
 ### Client의 cover범위
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%206.png)
+![Untitled](03%20Storage%20architecture/Untitled%206.png)
 
 1. client는 display역활만 수행하는, terminal기반 시스템
 2. UI가 독립되어 운용되는, web기반 시스템
@@ -80,7 +80,7 @@
 
 ### Peer-to-peer architecture: 각 node들이 server의 역활과 client의 역활을 동시에 수행하는 mesh network구조
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%207.png)
+![Untitled](03%20Storage%20architecture/Untitled%207.png)
 
 ### 🌟Distributed storage systems
 
@@ -91,7 +91,7 @@
 
 ### RAID 0: parity와 mirroring이 존재하지 않는다
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%208.png)
+![Untitled](03%20Storage%20architecture/Untitled%208.png)
 
 - parity: 오류가 있는지 체크에 이용
 - mirroring: 데이터 중복 저장
@@ -102,7 +102,7 @@
 
 ### RAID 1 : striping없이 mirroring만 가능
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%209.png)
+![Untitled](03%20Storage%20architecture/Untitled%209.png)
 
 - striping: 여러 disk를 하나의 disk처럼 사용하는 것
 - 같은 내용을 멀리 떨어져 있는 disk에도 써준다
@@ -112,7 +112,7 @@
 
 ### RAID 4: block level striping + parity disk
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2010.png)
+![Untitled](03%20Storage%20architecture/Untitled%2010.png)
 
 - line을 맞춰서 mirroring block을 정하고, parity block을 꺼내서 오류가 난다면 복구 시킴
 - parity disk의 Ap에 A1, A2, A3의 내용을 저장한다
@@ -122,7 +122,7 @@
 
 ### RAID 5: 가장 많이 사용되는 경우. Parity부하를 분산시키기 위해 parity block을 분산시킴
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2011.png)
+![Untitled](03%20Storage%20architecture/Untitled%2011.png)
 
 - parity정보가 disk마다 분산 되어 있다
 - read는 동일하고, write의 경우는 RAID4와 동일하다
@@ -131,7 +131,7 @@
 
 ### Network storage
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2012.png)
+![Untitled](03%20Storage%20architecture/Untitled%2012.png)
 
 - Direct Attached Storage(DAS): host장치에 붙어서 저장은 I/O port를 통해서 일어난다
 - Network-Attached Storage(NAS): IP기반 원격 접속으로,  Remote Procedure Call을 이용하여, 네트워크를 통해서 쉽게 접근할 수 있다. 그러나 여러대가 동시에 온다면 성능이 저하됨
@@ -139,7 +139,7 @@
 
 ### 🌟Web search application structure
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2013.png)
+![Untitled](03%20Storage%20architecture/Untitled%2013.png)
 
 - Top-level Aggregator(TLA): 처음 보여지는 서버. Top에서 middle로 넘겨준다
 - Middle-level Aggregator(MLA): MLA를 거친 이후, worker node에서 결과를 return시켜준다. Return받은 결과는 MLA에서 sorting과정을 거쳐서 위로 보내준다
@@ -159,7 +159,7 @@
 
 ### 🌟페이스북 사진 저장소의 저장 방식
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2014.png)
+![Untitled](03%20Storage%20architecture/Untitled%2014.png)
 
 - hot zone: access가 많은
 - cold zone: access가 적은
@@ -183,11 +183,11 @@
 
 ### 🌟Haystack photo storage architecture
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2015.png)
+![Untitled](03%20Storage%20architecture/Untitled%2015.png)
 
 서버는 NAS로 HTTP요청을 보내고, NAS에서 반환하는 cache파일을 custom system call을 이용하여 직접 open하여 handling한다. NAS는 이미지를 분산하여 저장하는데, 이러한 cache는 잘 접속되지 않는 이미지에 대해서는 cache될 가능성이 낮기 때문에 약간의 성능 개선만 이루어진다
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2016.png)
+![Untitled](03%20Storage%20architecture/Untitled%2016.png)
 
 페이스북은 인기있는 이미지를 제공하기 위해 CDN을 사용하고, long tail에 대해서 효율적으로 응답하기 위해서 haystack을 사용한다
 
@@ -228,7 +228,7 @@
 
 ### Commodity hardware: 2-level구조로 구성된다
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2017.png)
+![Untitled](03%20Storage%20architecture/Untitled%2017.png)
 
 - uplink rack은 더 빠르게, 중간 rack은 조금 더 드리게 만들어준다
 - 노드는 주로 일반 PC로 사용한다
@@ -236,12 +236,12 @@
 
 ### HDFS 구조
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2018.png)
+![Untitled](03%20Storage%20architecture/Untitled%2018.png)
 
 - PC는 block의 크기를 page의 size와 일치시켜 만들어 주지만, HDFS는 공간의 낭비가 있더라도 block의 크기를 크게, 64mb로 만든다
 - 중복 파일을 여러곳으로 흩어지게 저장한다
 
-![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2019.png)
+![Untitled](03%20Storage%20architecture/Untitled%2019.png)
 
 1. client는 이름만 알고 요청을 보낸다
 2. NameNode는 metadata의 정보를 가지고 있다. File을 file ID와 연결하여 mapping해준다
@@ -252,15 +252,15 @@
 
 - read: 파일의 위치, 혹은 파일의 정보를 NameNode가 알려준다
     
-    ![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2020.png)
+    ![Untitled](03%20Storage%20architecture/Untitled%2020.png)
     
 - write: 중복된 파일에서 consistency문제가 발생할 수 있기 때문에 client는 first datanode로 write하고, datanode는 데이터를 다음 datanode로, 또 다음 노드로 보낸다. Replica에 모두 쓰여지면, client는 써야하는 다음 block으로 넘어간다. Latency가 중요한 app에서는 사용할 수 없다
     
-    ![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2021.png)
+    ![Untitled](03%20Storage%20architecture/Untitled%2021.png)
     
 - error recovery: error가 발생했다고 report하고, backup 데이터에 새롭게 linking해주고, 새로운 백업 파일을 만들어준다
     
-    ![Untitled](03%20Storage%20architecture%20cc643da1545443af97798538f968b7b0/Untitled%2022.png)
+    ![Untitled](03%20Storage%20architecture/Untitled%2022.png)
     
 
 ### NameNode metadata

@@ -17,7 +17,7 @@
 - tight consistency: 모든 사용자는 반드시 같은 내용을 읽을 수 있어야 한다. Update가 생기는 경우, 바로 반영한다. Update는 모든 copy에 대해 single atomic operation으로 진행된다
 - consistency vs. overhead: replication이 너무 많아지면 consistency문제가 발생하고, consistency 유지시키는 것은 cost가 들기 때문에 performance를 저하 시킨다. Performance를 너무 높이다 보면 global synchromization이 낮아지게 되는 dilema
 
-![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled.png)
+![Untitled](06%20Consistency%20and%20Replication/Untitled.png)
 
 ### Data store: 공유되는 저장소인 distributed shared memory(💯DSM), database, file system등에서 read, write 작업을 수행한다
 
@@ -34,38 +34,38 @@
 
 ### Tight consistency: 값이 업데이트 된 이후에는 무조건 최신 데이터의 내용을 업데이트 해야 한다. 구현은 쉽지만 performance가 낮아진다
 
-![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%201.png)
+![Untitled](06%20Consistency%20and%20Replication/Untitled%201.png)
 
 - 실제로 write를 하자 마자 반영되는 것이 아니라, 약간의 delay가 발생할 수 있기 때문에 약간의 inconsistency가 발생할 수 있다
 
 ### Sequential consistency: 실제 순서가 중요한 것이 아니라, 모든 경우에 순서가 똑같기만 하면 된다
 
-![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%202.png)
+![Untitled](06%20Consistency%20and%20Replication/Untitled%202.png)
 
 - 이 경우, p1과 p2의 순서에 상관 없이 p3, p4의 순서가 b→a로 동일하게 나오기 때문에 sequentially consistent
 
-![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%203.png)
+![Untitled](06%20Consistency%20and%20Replication/Untitled%203.png)
 
 - 이 경우 p1과 p2의 순서에 상관 없이, p3와 p4의 순서가 서로 다르기 때문에 sequentially inconsistent
 
 ### Casual consistency: sequential보다 loose. Casually related된, 순서를 파악할 수 있는 write는 read의 순서가 맞아야 하고, 순서를 파악할 수 있는 write인 concurrent write의 경우에는 순서가 달라도 상관 없다
 
-![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%204.png)
+![Untitled](06%20Consistency%20and%20Replication/Untitled%204.png)
 
 - p1과 p2에서 write가 이루어 졌는데, a와 b의 경우 p1에서 write를 한 이후에 p2에서 a를 read했고 이후에 b에 write를 했기 때문에 casually related write다. 또한 같은 p1에서 a를 쓴 이후에 c를 썼기 때문에 이 경우 또한 casually related write이다. 그러나 p2에서 쓴 b와 p1에서 쓴 c의 경우에는 순서를 파악할 수 없기 때문에 concurrent write로 볼 수 있다
     - 이 경우에서 a → c, a → b의 경우를 만족해야 한다. P3의 경우는 만족하고, p4의 경우 역시 두 경우 만족하기 때문에 casually consistent하다고 볼 수 있다
     - p1과 p2의 경우에는 a를 쓴 이후에 p2에서 read를 했고, 이후에 b를 썼기 때문에 casually related여서 a → b순서를 만족해야 한다. P3의 경우에 이를 만족하지 못하기 때문에 casually inconsistent하고, p3와 p4의 경우 모두 순서가 동일하지 않기 때문에 sequentially inconsistent하다
         
-        ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%205.png)
+        ![Untitled](06%20Consistency%20and%20Replication/Untitled%205.png)
         
     - p1과 p2는 a와 b의 순서를 파악할 수 없기 때문에 concurrent write이다. 따라서 이 경우 p3와 p4모두 a b의 순서가 상관 없다. 따라서 casually consistent하다. 그러나 p3, p4에서 순서가 모두 다르기 때문에 sequentially inconsistent하다
         
-        ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%206.png)
+        ![Untitled](06%20Consistency%20and%20Replication/Untitled%206.png)
         
 
 ### FIFO consistency: 가장 loose한 경우로, 같은 process에서 쓴 경우만 순서가 맞으면 되고, 다른 process에서 쓴 경우의 순서는 상관 없다
 
-![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%207.png)
+![Untitled](06%20Consistency%20and%20Replication/Untitled%207.png)
 
 - 같은 process에서 쓴  b → c의 순서만 맞으면 되고, a의 순서는 상관 없다. P3와 p4의 경우 모두 b → c를 만족하기 때문에 FIFO consistency를 만족한다. 순서가 다르기 때문에 sequential을 만족하지 않고, casual의 경우 a→b→c를 만족해야 하기 때문에 p3때문에 casual inconsistent하다
 
@@ -82,7 +82,7 @@
 - web cache의 경우, 웹페이지의 update는 webmaster에 의해 이루어지는데, 실시간으로 update안되더라도 상관 없기 때문에 이 방식이 유리하다
 - client에서 항상 같은 replica를 접근하는 경우는 상관 없지만, 만약 다른 replica를 접근하게 되는 경우 문제가 발생할 수 있다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%208.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%208.png)
     
     - 특정 지점에서 업데이트 한 이후, A에 반영이 되었을때, 이후 update내용이 전달되지 않은 상태에서 다른 지점에서 업데이트가 되지 않은 B에 접속하였을 경우, 문제가 발생할 수 있다
     - B에서 읽더라도 A와 동일한 상태여야 한다
@@ -92,11 +92,11 @@
 - 분산 이메일 DB의 경우, 접속해서 이메일을 확인한 이후, 다른 곳에서 다시 접속해도 동일한 내용을 보여주어야 하며, 새로운 메일이 온 경우라면 새로운 메일을 추가하여 보여주어야 한다
 - 이 경우는, write의 순서가 확실하기 때문에, x1이후에 x2오는 것이 적절하다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%209.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%209.png)
     
 - write의 순서가 확실하지 않기 때문에 어느 것이 newer인지 확인할 수 없다. 따라서 monotonic-read consistenct를 보장하지 못한다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2010.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2010.png)
     
 
 ### Monotonic-write consistency: write를 기준으로 순서를 파악하는 것으로, write operation은 같은 client의 다른 write작업이 끝난 이후에 진행된다
@@ -104,11 +104,11 @@
 - FIFO와 유사하게, write operation은 모든 replica에서 동일해야 한다
 - write operation은 client사이에서 모두 동일해야 하는데, 각 x1, x2, x3의 순서가 명확하기 떄문에 monotonic-write consistency가 성립한다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2011.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2011.png)
     
 - write의 순서 모르면 monotonic이 유지되지 않는다.예시는 monotonic write이 보장되지 않는다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2012.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2012.png)
     
 
 ### Read-your-writes consistency: 같은 client에서 write된 내용은 이어지는 read에서 내용에 update되어야 한다
@@ -117,26 +117,26 @@
 - cache는 항상 update된 내용을 반영하여 가장 최신 버전임을 보장해야 한다
 - 최신 write를 기준으로 x1 → x2이기 때문에 read를 하면 x2가 나와야 한다.
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2013.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2013.png)
     
 - x1과 x2는 concurrent하게 쓰였기 때문에 write가 끝난 이후 write가 이루어진 것이 아니라 x1 업데이트 내용이 없기 때문에 read-your-write이 보장되지 않는다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2014.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2014.png)
     
 - read-your-writes를 보장하려면 두 read모두 x2여야 한다. 따라서 read-your-writes consistency를 만족하지 못한다. Monotonic read는 만족한다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2015.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2015.png)
     
 
 ### Write-follow-reads consistency: item x에 대한 write는, 가장 최근에 read되었던 내용과 동일하거나, 그 내용에서 추가된 내용에 write를 하게 된다
 
 - 읽어온 가장 최신 값에서 추가된 내용인 x3이후에 x3를 쓰게 되었기 때문에 write-follow-reads consistency를 만족한다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2016.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2016.png)
     
 - 읽어온 최신 값에서 x1과 x2의 선후 관계를 모르기 때문에 x3를 추가로 쓰는 것은 write-follow-reads consistency를 보장하지 못한다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2017.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2017.png)
     
 
 ### Client centric은 client가 원하는것에 집중하여 시스템 전체의 일관성을 방지할 수 있다. Consistency요청을 relax하고, single client-view로 보자
@@ -145,7 +145,7 @@
 
 ### Content replication: 세개의 동심원 링으로 논리적으로 구성된다
 
-![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2018.png)
+![Untitled](06%20Consistency%20and%20Replication/Untitled%2018.png)
 
 - static replicas
     - permanent replicas: 초기 replica의 set으로 분산 데이터의 저장소를 구성한다. 원본과 똑같이 복사하며, 위치는 바뀌지 않는다. Web site mirroring, distributed DB와 같은 경우
@@ -158,7 +158,7 @@
             - threshold값을 설정해두고, del(S, F)이하로 값이 떨어지게 되는 경우, 복제본을 삭제하고, rep(S, F)값보다 더 개수가 많아지는 경우, 복제본을 새로 만들게 된다
             - 이 모든 과정은 서버에 의해 관리된다
                 
-                ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2019.png)
+                ![Untitled](06%20Consistency%20and%20Replication/Untitled%2019.png)
                 
             - A의 count를 파악하고, 이외에도 각기 다른 지역에서 각각의 파일의 요청 횟수를 파악하고, threshold값을 설정해둔다. 요청수, 거리 등을 종합적으로 판단한다
     - client-initaed replica: 동적으로 사용자의 요청에 따라 움직여지는 process. Web cache, web browser cache같은 것들이 있다
@@ -181,7 +181,7 @@
 - 모든 write operation은 하나의 서버, 즉 primary server로 forwarding된다
 - 전통적으로 distributed DB나 file system에서 이용된다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2020.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2020.png)
     
     - write request가 오면 primary가 모두 중지시킨 이후, update가 완료된다면, ACK을 받고 이후에 자원들을 다시 풀어주게 된다
 - 단점: client는 write이 모두 끝날 때가지 계속 기다려야 한다 → 대안: nonblocking approach
@@ -197,7 +197,7 @@
     - 만약 5개중 3개에서 okay를 받아서 version2로 업데이트 된 경우, 나머지 2개의 서버는 아직 version1으로 인식하고 있다
 - read: Nr + Nw > N을 만족하는 Nr개에게 물어본다. 이때 서버들이 return으로 version1, version2 이렇게 return하는 경우 version2를 최신으로 인식하면 된다
     
-    ![Untitled](06%20Consistency%20and%20Replication%20063fe162eede410b99947f1b8e7241d6/Untitled%2021.png)
+    ![Untitled](06%20Consistency%20and%20Replication/Untitled%2021.png)
     
 - 다음과 같이 Nr + Nw > N이면 반드시 최신 버전이 한개 이상은 겹치게 된다
 - Nw > N/2: 동시에 여러명이 write할 수 없다

@@ -18,7 +18,7 @@
 
 ### TCP window: window 크기를 조절하여 데이터 전송 속도를 조절
 
-![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled.png)
+![Untitled](04%20Network%20architecture/Untitled.png)
 
 - packet loss는 congestion 발생의 척도로, congestion window(cwnd)를 이용하여 congestion control을 진행한다
 - reciever는 advertised window(awnd)를 이용하여 flow control에 이용한다. ACK을 보내는 경우, awnd의 값을 같이 넣어주어 데이터를 전송할떄, receiver의 window 상황을 고려하여 보내게 된다
@@ -26,7 +26,7 @@
 
 ### TCP congestion control: 처음에는 느리게 보내고, 시간이 지날수록 보내는 속도를 급격하게 늘린다
 
-![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%201.png)
+![Untitled](04%20Network%20architecture/Untitled%201.png)
 
 - 처음 시작은 낮은 속도로 보내고, exponential하게 속도를 증가 시킨다
 - ssthresh값에 도달하는 경우, 이후로는 linear하게 증가시킨다
@@ -34,7 +34,7 @@
 - TCP Reno는 TCP fast recovery를 이용하여 ssthresh값까지 조절할 수 있다. ACK이 3번 연속으로 loss가 발생하면, ssthresh값을 줄인 후, ssthresh값부터 다시 linear하게 증가시키면서 보낸다
 - AIMD: additive increase + multiplicative decrease. 오류가 없다면 1씩 증가시키고, 오류가 생기면 반으로 줄이는 것
     
-    ![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%202.png)
+    ![Untitled](04%20Network%20architecture/Untitled%202.png)
     
 
 ### 🌟Multipath TCP(MPTCP): 하나의 TCP 연결에서 여러 경로를 사용하여 데이터를 전송하게 해주는 protocol
@@ -54,11 +54,11 @@
 - 여러개의 네트워크를 대상으로 subflow를 만들어 여러 path로 이용할 수 있다
 - application과 TCP 사이에 존재하여, HTTP에게는 정상적인 TCP로 보일 수 있지만, 여러개의 TCP subflow를 관리하고 있다
     
-    ![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%203.png)
+    ![Untitled](04%20Network%20architecture/Untitled%203.png)
     
 - MPTCP handshake: first subflow는 TCP의 3-way handshake와 유사하게 진행되고, second subflow는 first의 연결이 맺어진 이후, 3-way handshake를 통해서 연결된다
     
-    ![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%204.png)
+    ![Untitled](04%20Network%20architecture/Untitled%204.png)
     
 - Multipath TCP backup mode: 안정성을 위해 주로 사용한다. 휴대폰의 경우, WI-Fi를 main으로 사용하고 있더라도, backup connection이 LTE를 통해 진행되고 있다가, Wi-Fi가 사용 불가능 상황이라면 LTE를 이용하게 된다. 단, backup이 되어있더라도 실제 이용되고 있는 subflow는 한가지 뿐이다. 안정성을 유지하면서도 더 적은 에너지를 사용한다
 - Multipath TCP full mode: 가능한 모든 multipath자원을 전송에 이용한다. 전송 속도가 향상된다
@@ -67,14 +67,14 @@
 
 - persistent communication: TCP와 비슷하게, 계속 저장되어 있는 상태
     
-    ![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%205.png)
+    ![Untitled](04%20Network%20architecture/Untitled%205.png)
     
     - 전송되는 메세지는 수신자에게 전달 완료까지 communication middleware에 저장된다
     - 수신받는 app은 메세지가 제출되었을때, 실행중일 필요는 없다
     - 메세지를 전달 받지 못하는 경우는 없다
 - transient communication: 일시적인 communication. UDP와 비슷하다
     
-    ![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%206.png)
+    ![Untitled](04%20Network%20architecture/Untitled%206.png)
     
     - 메세지가 보내지는 것은 반드시 송, 수신자의 app이 모두 실행중인 경우에만 가능하다
     - 수신자의 app이 실행중이지 않은 경우, message는 drop된다. 따라서 메세지를 받지 못하는 경우가 생길 수 있다
@@ -99,7 +99,7 @@
 
 ### 🌟Remote Procedure Call(RPC): 분산시스템에서 procedure호출을 위해 사용되는 call로, 원격 서버에 있는 procedure를 call하는 것이다
 
-![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%207.png)
+![Untitled](04%20Network%20architecture/Untitled%207.png)
 
 - 다른 방식은 복잡하고 에러 복구, 데이터 보호가 필요하다
 - 어플리케이션 특정된 더 높은 수준의 추상화를 시켜서 문제를 해결한다
@@ -123,7 +123,7 @@
 
 ### RPC의 동작 과정
 
-![Untitled](04%20Network%20architecture%20d73621c0e6f1469baa165126b75a3b24/Untitled%208.png)
+![Untitled](04%20Network%20architecture/Untitled%208.png)
 
 1. client stub의 동작
     - client stub: local procedure call을 네트워크를 건너서 수행되도록 하는 request로 바꾸어 주는 코드. 원격 호출을 local 호출로 proxying해준다

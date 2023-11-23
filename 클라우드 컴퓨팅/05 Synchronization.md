@@ -19,16 +19,16 @@
 
 - Time-of-Arrival(ToA): signal 속도 c(빛의 시간), 위성에서 신호를 보낸 송신 시간 Ti, GPS 수신기에서 수신 받은 시간 Tnow를 이용하여 인공위성까지의 거리 di를 계산할 수 있다
     
-    ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled.png)
+    ![Untitled](05%20Synchronization/Untitled.png)
     
 - trilateration(삼각 측량): 수신자에게 signal이 오기까지 약간의 delay가 생기기 때문에 송신자와 수신자간의 sync가 안 맞을 수 있기 때문에 오차를 조정하는 과정이 필요하다
     
-    ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%201.png)
+    ![Untitled](05%20Synchronization/Untitled%201.png)
     
     - ti: 위성 i로부터 메세지를 받은 시간
     - Δr: 수신자의 clock에서 발생하는 오차
     
-    ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%202.png)
+    ![Untitled](05%20Synchronization/Untitled%202.png)
     
     - 실제 거리는 오차를 뺴주는 과정이 필요하다
     - xr, yr은 수신자의 x, y좌표 값이다
@@ -36,17 +36,17 @@
 
 ### Network Time Protocol(NTP): 서버는 정확한 시간을 가지고 있지만, 각노드는, server로 부터 요청을 받아도 propagation delay때문에 sync가 안 맞을 수 있다
 
-![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%203.png)
+![Untitled](05%20Synchronization/Untitled%203.png)
 
 - client는 전송한 시간 T1, server가 전달받은 시간 T2, 서버가 다시 보낸 T3, 서버로 부터 받은 T4를 알고 있다
 - A가 B에 비해 θ만큼 더 느린 경우. B의 시간 = A의 시간 + θ 이다
 - Propagation delay가 server → client, client → server가 같다고 가정하였을때, 다음과 같이 계산될 수 있다
     
-    ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%204.png)
+    ![Untitled](05%20Synchronization/Untitled%204.png)
     
 - 따라서, θ는 다음과 같이 계산할 수 있다
     
-    ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%205.png)
+    ![Untitled](05%20Synchronization/Untitled%205.png)
     
 
 ### 🧙‍♂️Logical clocks: 정확한 시간 파악할 필요 없고, 선후 관계만 파악하자
@@ -68,11 +68,11 @@
     - global한 시계가 없는 경우에는 어떻게 일관성을 유지할까? - 각기 다른 logical clock을 유지한다
 - Lamport’s logical clocks: 각기 다른 logical clock을 유지하고 있는 경우, m1, m2에서는 문제가 발생하지 않지만 m3, m4의 경우는 이전에 온 내용의 clock이 더 느리기 때문에 문제가 발생한다
     
-    ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%206.png)
+    ![Untitled](05%20Synchronization/Untitled%206.png)
     
     - 다음과 같이 clock의 시간 값을 바꾸고, 순서에 맞게 시간을 조정해준다
         
-        ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%207.png)
+        ![Untitled](05%20Synchronization/Untitled%207.png)
         
         - 이전 time값 보다는 적어도 1 이상 차이가 있어야 한다
         - pi가 메세지 m을 보내는 경우, 메세지의 timestamp ts(m) = ci
@@ -90,15 +90,15 @@
     - single point failure: coordiantor에서 발생하는 오류는 치명적이다
     - 자원을 쓰고 있는 사람이 없다면 바로 할당하여준다
         
-        ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%208.png)
+        ![Untitled](05%20Synchronization/Untitled%208.png)
         
     - 이미 쓰고 있다면, permission이 주어질때까지 queue에 들어가서 대기하고 있게 된다
         
-        ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%209.png)
+        ![Untitled](05%20Synchronization/Untitled%209.png)
         
     - 이전에 사용중이던 process가 사용 완료한다면, queue에 있는 순서대로 자원을 받는다
         
-        ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%2010.png)
+        ![Untitled](05%20Synchronization/Untitled%2010.png)
         
     
     <aside>
@@ -115,7 +115,7 @@
     - entry 이전의 delay: request / ok
 - Token ring algorithm: 단방향 원형으로 구현하여 관리한다
     
-    ![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%2011.png)
+    ![Untitled](05%20Synchronization/Untitled%2011.png)
     
     - token은 프로세스 간에 넘겨지는 메세지이다. Token을 가지고 있는 사람이 자원을 할당받을 수 있다
     - 초기 상태에서는 process 0에게 token(자원)을 준다
@@ -178,7 +178,7 @@
 - 만약 아무도 응답을 보내지 않는다면 Pk가 새로운 coordinator가 된다
 - 더 높은 process에서 응답이 온다면 Pk의 역활은 종료된다
 
-![Untitled](05%20Synchronization%2008fc9d15e03d4b17956767129be38f35/Untitled%2012.png)
+![Untitled](05%20Synchronization/Untitled%2012.png)
 
 - 진행 과정
     1. 더 높은 weight가지는 process에게 election message를 보내게 되는데, 이미 fail된 process는 메세지를 보내지 않고, 5기준으로는 자신보다 높은 6에게 메세지가 돌아오게 된다. 
